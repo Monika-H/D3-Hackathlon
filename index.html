@@ -5,15 +5,7 @@
         <title>D3 Hackathlon</title>
         <script type="text/javascript" src="d3/d3.js"></script>
         <script type="text/javascript" src="js/readData.js"></script>
-		<style type="text/css">
-			body {
-				background-color: #FBF8EF;
-			}
-
-			svg {
-				background-color: white;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="css/styleSheet.css">
     </head>
     <body>
 	 <input name="linePlot"
@@ -34,7 +26,7 @@
         </p>
 
 	<script type="text/javascript">
-	    var dataset;
+	    var dataset, svg_big;
         var xVar,
             yVar;
 
@@ -76,7 +68,7 @@
     		var h = 400;
     		var w_bigPlot = 600;
     		var w_smallPlot = 400;
-    		var svg_big = d3.select("body")
+    		svg_big = d3.select("body")
     				.append("svg")
     				.attr("width", w_bigPlot)
     				.attr("height", h)

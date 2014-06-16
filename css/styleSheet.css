@@ -1,0 +1,13 @@
+body {
+	background-color: #FBF8EF;
+}
+
+svg {
+	background-color: white;
+}
+
+.box {
+	stroke: steelBlue;
+	stroke-width: 3;
+	fill: lightSteelBlue;
+}
