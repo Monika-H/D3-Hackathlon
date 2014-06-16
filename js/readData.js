@@ -3,7 +3,8 @@ function readDataTable(filename, patientLabel) {
     d3.csv(filename, function(error, inData) {
 
         var uniqueIds,
-            patientIds;
+            patientIds,
+            lookup;
 
         if (error) {
             console.log(error);
@@ -17,11 +18,13 @@ function readDataTable(filename, patientLabel) {
                                      });
 
             dataset = new Array(uniqueIds.length);
+            lookup = new Array(uniqueIds.length);
             for (var i = 0; i < uniqueIds.length; i++) {
-                dataset[uniqueIds[i]] = new Array();
+                lookup[uniqueIds[i]] = i;
+                dataset[i] = new Array();
             }
             for (var i = 0; i < inData.length; i++) {
-                dataset[inData[i].subject].push(inData[i]);
+                dataset[lookup[inData[i].subject]].push(inData[i]);
             }
         }
         initialize();
