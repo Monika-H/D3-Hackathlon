@@ -14,5 +14,23 @@ svg {
 
 line  {
 	stroke: steelBlue;
-	stroke-width: 3;			
+	stroke-width: 3;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
+
+.line {
+  fill: none; /* very important, otherwise D3 will fill the area defined by the line */
+  stroke: steelblue;
+  stroke-width: 1.5px;
 }
