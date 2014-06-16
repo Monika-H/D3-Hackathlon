@@ -1,4 +1,4 @@
-"","subject","visit","day","age","gender","daily_insulin_dose","weight","bmi","hemoglobin_HbA1c_percent","fasting_plasma_glucose","postprandial_glucose","systolic_blood_pressure","diastolic_blood_pressure"
+"row","subject","visit","day","age","gender","daily_insulin_dose","weight","bmi","hemoglobin_HbA1c_percent","fasting_plasma_glucose","postprandial_glucose","systolic_blood_pressure","diastolic_blood_pressure"
 "1",1723212,1,1,56,"male",45.2433724194168,115.345703087035,38.6230640365075,6.0091188022829,189.275521810116,314.060048502022,121.620586987976,77.0438721627569
 "2",1816620,1,1,64,"male",111.384961065092,115.82853139927,32.1791837251238,10.4200775226083,159.014228074494,324.401922313402,136.932419053118,60.775429152798
 "3",1037830,1,1,45,"male",129.213039193353,116.120777843537,30.9312854450148,10.9372620321195,142.037881498225,370.856014699498,116.536409910291,72.0253713069458

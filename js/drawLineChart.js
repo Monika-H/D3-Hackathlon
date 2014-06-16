@@ -17,6 +17,21 @@ function drawLinePlot() {
     var maxY = d3.max(dataset,function(d) { return d3.max(d, function(dd) {
                                                     if (parseFloat(dd[yVar])) {return dd[yVar];}}
                                                     );});
+    // for (i = 0; i < dataset.length; i++) {
+        // var keys = Object.keys(dataset[i]);
+        // for (j = 0; j < keys.length; j++) {
+            // console.log(dataset[i][keys[j]][yVar]);
+            // if (parseFloat(dataset[i][keys[j]][yVar]) < minY) {
+                // minY = parseFloat(dataset[i][keys[j]][yVar]);
+                // console.log("new minY="+minY);
+            // }
+            // if (parseFloat(dataset[i][keys[j]][yVar]) > maxY) {
+                // maxY = parseFloat(dataset[i][keys[j]][yVar]);
+                // console.log("new maxY="+maxY);
+            // }
+        // }
+    // }
+    //console.log("VS: minX="+minX+" maxX="+maxX+" minY="+ minY + " maxY="+maxY);
     var xScale = d3.scale.linear()
                      .domain([minX,maxX])
                      .range([padding, width - padding]);
