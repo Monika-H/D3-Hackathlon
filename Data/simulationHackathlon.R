@@ -53,58 +53,72 @@ systolic_blood_pressure,diastolic_blood_pressure)
 change.over.time <- function(item) {
 	item["weight"] <- item["weight"] + (runif(100)-0.7)*1.3
 	item["bmi"] <- item["weight"]/height.squared 
-	item["hemoglobin_HbA1c_percent"] <- item["hemoglobin_HbA1c_percent"] + (runif(100)-0.7)*0.1
-	item["fasting_plasma_glucose"] <- item["fasting_plasma_glucose"] + (runif(100)-0.7)*8
-	item["postprandial_glucose"] <- item["postprandial_glucose"] + (runif(100)-0.7)*10
-	item["systolic_blood_pressure"] <- item["systolic_blood_pressure"] + (runif(100)-0.7)*0.3
-	item["diastolic_blood_pressure"] <- item["diastolic_blood_pressure"] + (runif(100)-0.7)*0.3
+	item["hemoglobin_HbA1c_percent"] <- item["hemoglobin_HbA1c_percent"] + (runif(100)-0.7)*0.3
+	item["fasting_plasma_glucose"] <- item["fasting_plasma_glucose"] + (runif(100)-0.7)*9
+	item["postprandial_glucose"] <- item["postprandial_glucose"] + (runif(100)-0.7)*12
+	item["systolic_blood_pressure"] <- item["systolic_blood_pressure"] + (runif(100)-0.7)*0.5
+	item["diastolic_blood_pressure"] <- item["diastolic_blood_pressure"] + (runif(100)-0.7)*0.5
+  item
+}
+
+change.over.time.less <- function(item) {
+  item["weight"] <- item["weight"] + (runif(100)-0.7)*0.7
+  item["bmi"] <- item["weight"]/height.squared 
+  item["hemoglobin_HbA1c_percent"] <- item["hemoglobin_HbA1c_percent"] + (runif(100)-0.7)*0.1
+  item["fasting_plasma_glucose"] <- item["fasting_plasma_glucose"] + (runif(100)-0.7)*7
+  item["postprandial_glucose"] <- item["postprandial_glucose"] + (runif(100)-0.7)*9
+  item["systolic_blood_pressure"] <- item["systolic_blood_pressure"] + (runif(100)-0.7)*0.3
+  item["diastolic_blood_pressure"] <- item["diastolic_blood_pressure"] + (runif(100)-0.7)*0.3
+  item
 }
 
 nextPeriod <- visit1
-visit2 <- change.over.time(nextPeriod)
+visit2 <- rbind(change.over.time(nextPeriod[1:50,]),change.over.time.less(nextPeriod[51:100,]))
 visit2["day"] <- 30 + round((runif(100)-0.5)*6)
 visit2["visit"] <- 2
 
 nextPeriod <- visit2
-visit3 <- change.over.time(nextPeriod)
+visit3 <- rbind(change.over.time(nextPeriod[1:50,]),change.over.time.less(nextPeriod[51:100,]))
 visit3["day"] <- 60 + round((runif(100)-0.5)*6)
 visit3["visit"] <- 3
 
 nextPeriod <- visit3
-visit4 <- change.over.time(nextPeriod)
+visit4 <- rbind(change.over.time(nextPeriod[1:50,]),change.over.time.less(nextPeriod[51:100,]))
 visit4["day"] <- 90 + round((runif(100)-0.5)*6)
 visit4["visit"] <- 4
 
 nextPeriod <- visit4
-visit5 <- change.over.time(nextPeriod)
+visit5 <- rbind(change.over.time(nextPeriod[1:50,]),change.over.time.less(nextPeriod[51:100,]))
 visit5["day"] <- 120 + round((runif(100)-0.5)*6)
 visit5["visit"] <- 5
 
 nextPeriod <- visit5
-visit6 <- change.over.time(nextPeriod)
+visit6 <- rbind(change.over.time(nextPeriod[1:50,]),change.over.time.less(nextPeriod[51:100,]))
 visit6["day"] <- 150 + round((runif(100)-0.5)*6)
 visit6["visit"] <- 6
 
 nextPeriod <- visit6
-visit7 <- change.over.time(nextPeriod)
+visit7 <- rbind(change.over.time(nextPeriod[1:50,]),change.over.time.less(nextPeriod[51:100,]))
 visit7["day"] <- 180 + round((runif(100)-0.5)*6)
 visit7["visit"] <- 7
 
 nextPeriod <- visit7
-visit8 <- change.over.time(nextPeriod)
+visit8 <- rbind(change.over.time(nextPeriod[1:50,]),change.over.time.less(nextPeriod[51:100,]))
 visit8["day"] <- 210 + round((runif(100)-0.5)*6)
 visit8["visit"] <- 8
 
 nextPeriod <- visit8
-visit9 <- change.over.time(nextPeriod)
+visit9 <- rbind(change.over.time(nextPeriod[1:50,]),change.over.time.less(nextPeriod[51:100,]))
 visit9["day"] <- 240 + round((runif(100)-0.5)*6)
 visit9["visit"] <- 9
 
 nextPeriod <- visit9
-visit10 <- change.over.time(nextPeriod)
+visit10 <- rbind(change.over.time(nextPeriod[1:50,]),change.over.time.less(nextPeriod[51:100,]))
 visit10["day"] <- 270 + round((runif(100)-0.5)*6)
 visit10["visit"] <- 10
 
 data <- rbind(visit1,visit2,visit3,visit4,visit5,visit6,visit7,visit8,visit9,visit10)
+data.ordered <- data[order(data[,"subject"],data[,"visit"]),]
 
+setwd("Hackathlon")
 write.csv(data,"Hackathlon_Data.csv")
