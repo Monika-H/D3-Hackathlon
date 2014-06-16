@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Hackathlon</title>
+        <script type="text/javascript" src="../d3/d3.js"></script>
+		<style type="text/css">
+			body {
+				background-color: black;
+			}
+			
+			svg {
+				background-color: white;			
+			}
+		</style>
+    </head>
+    <body>
+	 <input name="linePlot" 
+                 type="button" 
+                value="Line Plot" 
+                onclick="drawLinePlot()" />
+	<input name="boxPlot" 
+                 type="button" 
+                value="Box Plot" 
+                onclick="drawBoxPlot()" />
+	<input name="scatterPlot" 
+                 type="button" 
+                value="Scatter Plot" 
+                onclick="drawScatterPlot()" />
+	<script type="text/javascript">
+		var h = 400;
+		var w_bigPlot = 600;
+		var w_smallPlot = 400;
+		var svg_big = d3.select("body")
+				.append("svg")
+				.attr("width", w_bigPlot)
+				.attr("height", h)
+				.attr("class","bigPlot");
+				
+		var svg_small = d3.select("body")
+				.append("svg")
+				.attr("width", w_smallPlot)
+				.attr("height", h)
+				.attr("class","smallPlot");
+				
+	</script>
+    </body>
+</html>
