@@ -43,7 +43,7 @@
             variables = Object.keys(dataset[Object.keys(dataset)[0]][0]);
             console.log(variables);
             selectX = document.getElementById("selectorX");
-            for (var i = 1; i < variables.length; i++) {
+            for (var i = 0; i < variables.length; i++) {
                 opt = document.createElement("option");
                 opt.value = variables[i];
                 opt.text = variables[i];
@@ -56,7 +56,7 @@
             // fill the options for the select element (Y variable)
             selectY = document.getElementById("selectorY");
             opt = document.createElement("option");
-            for (var i = 1; i < variables.length; i++) {
+            for (var i = 0; i < variables.length; i++) {
                 opt = document.createElement("option");
                 opt.value = variables[i];
                 opt.text = variables[i];

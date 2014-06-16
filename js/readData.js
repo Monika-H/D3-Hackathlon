@@ -1,6 +1,22 @@
 function readDataTable(filename, patientLabel) {
 
-    d3.csv(filename, function(error, inData) {
+    d3.csv(filename, function(d) {
+	return {
+		subject: d.subject,
+		visit: +d.visit,
+		day: +d.day,
+		age: +d.age,
+		gender: d.gender,
+		daily_insulin_dose: +d.daily_insulin_dose,
+		weight: +d.weight,
+		bmi: +d.bmi,
+		hemoglobin_HbA1c_percent: +d.hemoglobin_HbA1c_percent,
+		fasting_plasma_glucose: +d.fasting_plasma_glucose,
+		postprandial_glucose: +d.postprandial_glucose,
+		systolic_blood_pressure: +d.systolic_blood_pressure,
+		diastolic_blood_pressure: +d.diastolic_blood_pressure
+	};},
+		function(error, inData) {
 
         var uniqueIds,
             patientIds,
@@ -9,6 +25,8 @@ function readDataTable(filename, patientLabel) {
         if (error) {
             console.log(error);
         } else {
+			inData = inData.sort(function(a,b) {return(a.visit) - (b.visit)});
+
             patientIds = [];
             for (var i = 0; i < inData.length; i++) {
                 patientIds.push(inData[i][patientLabel]);
