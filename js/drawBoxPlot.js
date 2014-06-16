@@ -1,16 +1,16 @@
-drawBoxPlot = function(data,svg) {
+drawBoxPlot = function() {
 
-		var	keys = Object.keys(data)
+		var	keys = Object.keys(dataset)
 		var boxplot_data = [];
 
-		for (var index = 0; index < data[0].length; index++) {
+		for (var index = 0; index < dataset[0].length; index++) {
 			object = {
-				visit: d3.min(data, function(d){ return d[index][xVar];}),
-				maximum: d3.max(data,function(d) {return d[index][yVar]}),
-				minimum: d3.min(data,function(d) {return d[index][yVar]}),
-				median: d3.median(data,function(d) {return d[index][yVar]}),
-				quartile_1: d3.quantile(data.map(function(d){ return d[index][yVar];}).sort(d3.ascending),0.25),
-				quartile_3: d3.quantile(data.map(function(d){ return d[index][yVar];}).sort(d3.ascending),0.75)
+				visit: d3.min(dataset, function(d){ return d[index][xVar];}),
+				maximum: d3.max(dataset,function(d) {return d[index][yVar]}),
+				minimum: d3.min(dataset,function(d) {return d[index][yVar]}),
+				median: d3.median(dataset,function(d) {return d[index][yVar]}),
+				quartile_1: d3.quantile(dataset.map(function(d){ return d[index][yVar];}).sort(d3.ascending),0.25),
+				quartile_3: d3.quantile(dataset.map(function(d){ return d[index][yVar];}).sort(d3.ascending),0.75)
 				}
 			boxplot_data.push(object);				
 		}
@@ -28,7 +28,7 @@ drawBoxPlot = function(data,svg) {
 								.domain([d3.min(boxplot_data, function(d) { return d.minimum;}),d3.max(boxplot_data, function(d) { return d.maximum;})])
 								.range([h-padding_h, padding_h]);
 
-		svg.selectAll("rect")
+		svg_big.selectAll("rect")
 			   .data(boxplot_data)
 			   .enter()
 			   .append("rect")
@@ -44,7 +44,7 @@ drawBoxPlot = function(data,svg) {
 			   .attr("width",xScale(0.0))
 			   .attr("class","box");	
 					
-		svg.selectAll("line.center")
+		svg_big.selectAll("line.center.line")
 			   .data(boxplot_data)
 			   .enter()
 			   .append("line")
@@ -58,10 +58,11 @@ drawBoxPlot = function(data,svg) {
 					return xScale(d[xVar]) + xScale(0.5)/2;
 					})			
 			   .attr("y2",function(d){
-					return yScale(d.maximum);
+					return yScale(d.maximum);	
 				})
+				.attr("class","line");
 				
-			svg.selectAll("line.whiskers.down")
+			svg_big.selectAll("line.whiskers.down.line")
 			   .data(boxplot_data)
 			   .enter()
 			   .append("line")
@@ -75,10 +76,11 @@ drawBoxPlot = function(data,svg) {
 					return xScale(d[xVar]) + xScale(0.5)*2/3;
 					})			
 			   .attr("y2",function(d){
-					return yScale(d.minimum);
+					return yScale(d.minimum);			
 				})
+				.attr("class","line");
 
-			svg.selectAll("line.whiskers.up")
+			svg_big.selectAll("line.whiskers.up.line")
 			   .data(boxplot_data)
 			   .enter()
 			   .append("line")
@@ -94,6 +96,7 @@ drawBoxPlot = function(data,svg) {
 			   .attr("y2",function(d){
 					return yScale(d.maximum);
 				})
+				.attr("class","line");
 								
 
 }

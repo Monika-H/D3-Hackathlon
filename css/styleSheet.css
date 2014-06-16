@@ -8,13 +8,8 @@ svg {
 
 .box {
 	stroke: steelBlue;
-	stroke-width: 3;
+	stroke-width: 1.5;
 	fill: lightSteelBlue;
-}
-
-line  {
-	stroke: steelBlue;
-	stroke-width: 3;
 }
 
 .axis path,
