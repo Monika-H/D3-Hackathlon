@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>D3 Hackathlon</title>
         <script type="text/javascript" src="d3/d3.js"></script>
+        <script type="text/javascript" src="js/readData.js"></script>
 		<style type="text/css">
 			body {
 				background-color: black;
@@ -28,21 +29,27 @@
                 value="Scatter Plot"
                 onclick="drawScatterPlot()" />
 	<script type="text/javascript">
-		var h = 400;
-		var w_bigPlot = 600;
-		var w_smallPlot = 400;
-		var svg_big = d3.select("body")
-				.append("svg")
-				.attr("width", w_bigPlot)
-				.attr("height", h)
-				.attr("class","bigPlot");
+	    var dataset;
 
-		var svg_small = d3.select("body")
-				.append("svg")
-				.attr("width", w_smallPlot)
-				.attr("height", h)
-				.attr("class","smallPlot");
 
+	    readDataTable('Data/Hackathlon_data.csv','subject');
+        function initialize() {
+           console.log(dataset);
+    		var h = 400;
+    		var w_bigPlot = 600;
+    		var w_smallPlot = 400;
+    		var svg_big = d3.select("body")
+    				.append("svg")
+    				.attr("width", w_bigPlot)
+    				.attr("height", h)
+    				.attr("class","bigPlot");
+
+    		var svg_small = d3.select("body")
+    				.append("svg")
+    				.attr("width", w_smallPlot)
+    				.attr("height", h)
+    				.attr("class","smallPlot");
+       }
 	</script>
     </body>
 </html>
