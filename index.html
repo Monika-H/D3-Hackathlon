@@ -7,7 +7,7 @@
         <script type="text/javascript" src="js/readData.js"></script>
 		<style type="text/css">
 			body {
-				background-color: black;
+				background-color: #FBF8EF;
 			}
 
 			svg {
@@ -28,13 +28,51 @@
                  type="button"
                 value="Scatter Plot"
                 onclick="drawScatterPlot()" />
+        <p>
+            X: <select id="selectorX" style="vertical-align:top"></select>
+            Y: <select id="selectorY" style="vertical-align:top"></select>
+        </p>
+
 	<script type="text/javascript">
 	    var dataset;
-
+        var xVar,
+            yVar;
 
 	    readDataTable('Data/Hackathlon_data.csv','subject');
         function initialize() {
-           console.log(dataset);
+
+            var variables,
+                selectX,
+                selectY,
+                opt;
+
+            variables = Object.keys(dataset[Object.keys(dataset)[0]][0]);
+            console.log(variables);
+            selectX = document.getElementById("selectorX");
+            for (var i = 1; i < variables.length; i++) {
+                opt = document.createElement("option");
+                opt.value = variables[i];
+                opt.text = variables[i];
+                selectX.add(opt);
+            }
+            selectX.onchange = function() {
+                xVar = selectX.value;
+                console.log("xVar is now " + xVar);
+            };
+            // fill the options for the select element (Y variable)
+            selectY = document.getElementById("selectorY");
+            opt = document.createElement("option");
+            for (var i = 1; i < variables.length; i++) {
+                opt = document.createElement("option");
+                opt.value = variables[i];
+                opt.text = variables[i];
+                selectY.add(opt);
+            }
+            selectY.onchange = function() {
+                yVar = selectY.value;
+                console.log("yVar is now " + yVar);
+            };
+
     		var h = 400;
     		var w_bigPlot = 600;
     		var w_smallPlot = 400;
