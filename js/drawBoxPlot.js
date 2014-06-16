@@ -36,12 +36,12 @@ drawBoxPlot = function(data,svg) {
 					return xScale(d[xVar]);
 					})			
 			   .attr("y",function(d){
-					return yScale(d.quartile_1);
+					return yScale(d.quartile_3);
 				})			
 			   .attr("height",function(d) {
 					return yScale(d.quartile_1)-yScale(d.quartile_3);
 					})			
-			   .attr("width",xScale(0.1))
+			   .attr("width",xScale(0.0))
 			   .attr("class","box");	
 					
 		svg.selectAll("line.center")
