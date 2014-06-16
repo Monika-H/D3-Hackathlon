@@ -11,3 +11,8 @@ svg {
 	stroke-width: 3;
 	fill: lightSteelBlue;
 }
+
+line  {
+	stroke: steelBlue;
+	stroke-width: 3;			
+}
