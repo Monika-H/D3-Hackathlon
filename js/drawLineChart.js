@@ -54,8 +54,8 @@ function drawLinePlot() {
 
     var line = d3.svg.line()
     //                .interpolate("basis")
-                    .x(function(d) {return xScale(d[xVar]);})
-                    .y(function(d) {if (parseFloat(d[yVar])) {return yScale(d[yVar]);} else {return height/2;}});
+                    .x(function(d) {console.log(d[xVar]);return xScale(d[xVar]);})
+                    .y(function(d) {if (parseFloat(d[yVar])) {console.log(d[yVar]);return yScale(d[yVar]);} else {return height/2;}});
 
     // in case there is already a line graph present, remove all line objects and the axes
     d3.selectAll(".line").remove();
@@ -83,7 +83,7 @@ function drawLinePlot() {
             return(color(i));
         });
 
-    path.each(function(d) { d.totalLength = this.getTotalLength();})
+    path.each(function(d) { console.log(this.getTotalLength()); d.totalLength = this.getTotalLength();})
         .attr("stroke-dasharray", function(d) { return d.totalLength + " " + d.totalLength;})
         .attr("stroke-dashoffset", function(d) { return d.totalLength;})
         .transition()
