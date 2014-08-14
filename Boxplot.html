@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Hackathlon</title>
+        <script type="text/javascript" src="d3/d3.js"></script>		
+        <script type="text/javascript" src="js/boxplot.js"></script>		
+		<link rel="stylesheet" type="text/css" href="css/styleSheet.css">
+	</head>
+    <body>
+	
+	<p>
+	    Y: 	<select id="selectorY" style="vertical-align:top">
+				<option> hemoglobin_HbA1c_percent </option>
+				<option> fasting_plasma_glucose </option>
+				<option> postprandial_glucose </option>
+				<option> systolic_blood_pressure </option>
+				<option> diastolic_blood_pressure </option>
+			</select>
+    </p>
+
+	<!--There are 2 ways to connect a button to a function: One is to name the function already in the button definition,
+	the second is using a D3 function which is able to connect to the button via ID. (I use one version of each)-->
+
+	<!-- Here the button is using the onclick attribute to connect to the function (at the bottom of the file) -->
+	<div id="reset">
+    <input name="updateButton" 
+                 type="button" 
+                value="Update Plot" 
+				onclick="updateData()" />
+	</div>
+	
+	<!-- This button has no functionality right now, I will use a D3 function to connect it to a function (at the bottom of the file) -->
+	<div id="datapoints">
+		<button>Show Datapoints</button> 
+	</div>
+	
+	<script type="text/javascript">
+	/*I'm not so familiar with updating the plots yet, for now I need a number of global variables*/
+	var dataset, yVar, svg, points; 
+	d3.csv('Data/Hackathlon_data2.csv', function(d) {
+	/*By default, numeric variables are imported as Strings. This can be a problem for certain algorithms:
+	for example the minimum of "10" and "2" would be "10". The "+"-character converts Srtings to numeric variables.*/
+	return {
+		subject: d.subject,
+		visit: +d.visit,
+		day: +d.day,
+		age: +d.age,
+		gender: d.gender,
+		daily_insulin_dose: +d.daily_insulin_dose,
+		weight: +d.weight,
+		bmi: +d.bmi,
+		hemoglobin_HbA1c_percent: +d.hemoglobin_HbA1c_percent,
+		fasting_plasma_glucose: +d.fasting_plasma_glucose,
+		postprandial_glucose: +d.postprandial_glucose,
+		systolic_blood_pressure: +d.systolic_blood_pressure,
+		diastolic_blood_pressure: +d.diastolic_blood_pressure
+	};},
+		function(error, inData) {
+				
+		if (error) {
+            console.log(error);
+        } else {
+		
+			/*I defined dataset as a global variable, so now the data will be accessible from everywhere.*/
+			dataset = inData;
+					
+			var lookup, uniqueIds, visitIds;
+		
+			/*This will create a connection to the drop-down menu on the top of the page (where the Y-value can be chosen)*/
+			var selectY = document.getElementById("selectorY");
+			/*selectY.value returns the current value that is chosen in the drop-down menu. I set yVar (the y-variable that will
+			be displayed in the boxplot) to a default value*/
+			yVar = selectY.value;
+		
+			/*This updates yVar when another value was chosen in the drop-down menu*/
+			selectY.onchange = function() {
+                yVar = selectY.value;
+                console.log("yVar is now " + yVar);
+            };
+
+			/*Define width and height of plot*/			
+			w = 600
+			h = 400
+		
+			/*plot the svg background (this will stay the same and never be updated)*/
+			svg = d3.select("body")
+				.append("svg")
+				.attr("width", w)
+				.attr("height", h);
+		
+			/*Do the actual plotting (see boxplot.js)*/		
+			drawBoxPlot(svg);
+
+     }});
+	 
+		/*There are 2 ways to connect a button to a function: One is to name the function already in the button definition,
+		the second is using a D3 function which is able to connect to the button via ID. (I use one version of each)*/
+	 
+		/*The plot is not automatically updated when changing the y-variable in the drop-down menu is changed. The "Update Plot"
+		button has to be clicked, which is connected to this function (see button code at the beginning). This will just re-draw 
+		the plot (except for the svg).
+		This function was connected to the button in the button definition.*/
+	 	function updateData() {	
+			drawBoxPlot(svg);
+		}
+		
+		/*Not a very pretty solution: When pressing the "Show datapoints"-button, I change the radius of the displayed datapoints 
+		in this function. When they are not seen, the radius is set to 0 (but the actual datapoints are still there.
+		This is a D3 function that selects a button by ID and then binds a function to "clicking" this button.*/
+		d3.select("#datapoints button").on("click",function() {
+				if(points.attr("r") == "0") {
+					points.attr("r",3);
+				} else {
+					points.attr("r",0);
+			   }});
+				
+	 	</script>
+    </body>
+</html>
